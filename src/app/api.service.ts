@@ -8,7 +8,7 @@ import { HttpRequestOptions } from './http-request-options.model';
   providedIn: 'root'
 })
 export class ApiService {
-  private baseUrl: string = 'http://openlibrary.org';
+  private baseUrl: string = 'https://openlibrary.org';
 
   constructor(private http: HttpClient) { }
 

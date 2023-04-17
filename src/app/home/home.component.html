@@ -1,0 +1,119 @@
+<header class="py-3 mb-4 border-bottom shadow bg-color rounded-5 px-3 mt-2">
+  <div class="container-fluid align-items-center d-flex">
+    <a href="#" class="link-dark text-decoration-none">
+      <h3 class="h2">Open Books Library 📚 </h3>
+    </a>
+    <div class="flex-grow-1 d-flex justify-content-center align-items-center">
+      <form (keyup)="search()" class="me-3 d-flex justify-content-center">
+        <input class="border-0 p-2 px-3" type="search" id="search-term" [(ngModel)]="searchTerm" name="search-term"
+          placeholder="Search Books..." />
+        <button class="btn btn-primary ms-3" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</header>
+
+<div class="container-fluid pb-3">
+  <div class="row">
+    <aside class="col-sm-3 flex-grow-sm-1 flex-shrink-1 sticky-top pb-sm-0 pb-3">
+      <div>
+        <h2 class="h2 shadow p-3 trendTitle">Trending Subjects 🔥</h2>
+      </div>
+      <div class="bg-light border rounded-3 p-4 sticky-top ">
+        <li class="trend list-group-item px-3  py-2 border-0 rounded-4 shadow-sm mb-2"
+          *ngFor="let subject of trendingSubjects" routerLink="/trending-subject/{{ subject.name }}">
+          <i class="bi bi-house fs-5">
+            <span class="d-none d-sm-inline h5 user-select-none"> >> {{ subject.name }}</span>
+          </i>
+        </li>
+      </div>
+    </aside>
+    <main class="col overflow-auto h-100" *ngIf="searchTerm !== null; else elseBlock">
+      <div class="bg-light border rounded-3 p-3 " *ngIf="books.length > 0">
+        <h2 class="display-6 ">Search results for "{{ searchTerm }}"</h2>
+        <section>
+          <table id="search-result" class="table table-striped table-bordered " cellspacing="0" width="100%">
+            <thead>
+              <tr>
+                <th class="th-sm h6">Title and Sub Title</th>
+                <th class="th-sm h6">Author</th>
+                <th class="th-sm h6">Year of Publication</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="
+                  let book of books
+                    | paginate : { itemsPerPage: count, currentPage: p }
+                ">
+                <td>
+                  <a class="text-decoration-none link" href="https://openlibrary.org{{ book.key }}" target="_blank">{{
+                    book.title }}</a>
+                </td>
+                <td>
+                  <a>{{ book.author_name }}</a>
+                </td>
+                <td>
+                  <a> {{ book.first_publish_year }}</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <nav aria-label="Page navigation example">
+            <ul class="pagination">
+              <li class="page-item">
+                <button class="page-link" (click)="previousPage()">
+                  Previous
+                </button>
+              </li>
+              <span class="page-link">{{ currentPage }} of {{ totalPages }}</span>
+              <li class="page-item">
+                <button class="page-link" (click)="nextPage()">Next</button>
+              </li>
+            </ul>
+          </nav>
+        </section>
+      </div>
+    </main>
+    <ng-template #elseBlock>No books found for {{ searchTerm }}</ng-template>
+  </div>
+</div>
+<!-- <app-trending-subjects>[allBooks]="allBooks"</app-trending-subjects> -->
+
+<!-- <div class="container-fluid pb-3">
+  <div class="row">
+    <main class="col overflow-auto h-100">
+      <div class="bg-light border rounded-3 p-3" *ngIf="books.length > 0" id="trending">
+        <div class="">
+          Top {{ books.length }} book{{ books.length > 1 ? "s" : "" }} on
+          {{ query }}
+        </div>
+
+        <table id="trending-subjects" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+          <thead>
+            <tr class="table-row">
+              <th class="header">Title and Sub Title</th>
+              <th class="header">Author</th>
+              <th class="header">First Publish Year</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="
+                let book of books">
+              <td>
+                <a class="" href="https://openlibrary.org{{ book.key }}" target="_blank">{{ book.title }}</a>
+              </td>
+              <td>
+                <a>{{
+                  book.authors.length > 0 ? book.authors[0].name : "Unknown"
+                  }}</a>
+              </td>
+              <td>
+                <a> {{ book.first_publish_year }}</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+</div> -->

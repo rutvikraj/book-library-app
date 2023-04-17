@@ -1,0 +1,38 @@
+* {
+    border-radius: 5px;
+    
+}
+.bg-color{
+    background: linear-gradient(146deg, #e1eeff 19.67%, #ffe4fb 127.56%);
+}
+
+body.thumb {
+    transform: scale(0.4);
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+}
+
+main {
+    min-height: auto;
+}
+
+[class*='container'] {
+    border: 1px dashed #eee;
+    background-clip: content-box;
+}
+
+.row [class*='col'] {
+    background-clip: content-box;
+}
+
+.nav-item {
+    background-color: #cfcfe8;
+    background-clip: content-box;
+}
+.trend:hover {
+    
+    cursor: pointer;
+    background: linear-gradient(146deg, #e1eeff 19.67%, #ffe4fb 127.56%);   
+}
+.trendTitle{
+    background: linear-gradient(146deg, #e1eeff 19.67%, #ffe4fb 127.56%);
+}
